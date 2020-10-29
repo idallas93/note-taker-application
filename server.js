@@ -31,3 +31,24 @@ app.get("/api/notes", function (req, res){
     return res.json(JSON.parse(fs.readFileSync("./db/db.json")))
 })
 
+// Route for saving a note to db.json
+app.post("/api/notes", function (req, res) {
+    // req.body is JSON post sent from UI
+    let newNoteRequest = req.body;
+    console.log("New request: ", newNoteRequest);
+
+    notesArray.push(newNoteRequest);
+    // Set id property of newNoteRequest to its index in notesArray
+    newNoteRequest.id = notesArray.indexOf(newNoteRequest);
+
+    fs.writeFileSync("./db/db.json", JSON.stringify(notesArray));
+    
+    res.json({
+        isError: false,
+        message: "Note successfully saved",
+        port: PORT,
+        status: 200,
+        success: true
+    });
+
+});
