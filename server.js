@@ -26,11 +26,13 @@ app.listen(PORT, function() {
   app.get("*", function(req, res) {
     res.sendFile(path.join(__dirname, "./public/index.html"));
   });
+// Returns all notes from notesArray when getNotes() is called in index.js
+app.get("/api/notes", function (req, res) {
+    return res.json(JSON.parse(fs.readFileSync("./db/db.json")));
+});
 
-//   API Gets from db.json
-app.get("/api/notes", function (req, res){
-    return res.json(JSON.parse(fs.readFileSync("./db/db.json")))
-})
+
+// POSTs
 
 // Route for saving a note to db.json
 app.post("/api/notes", function (req, res) {
@@ -51,8 +53,11 @@ app.post("/api/notes", function (req, res) {
         status: 200,
         success: true
     });
-    
+
 });
+
+
+// DELETEs
 
 app.delete("/api/notes/:id", function (req, res) {
     // id is index of note in notesArray
