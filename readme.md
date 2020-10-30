@@ -4,7 +4,7 @@
 
 This app can be used to write, save, and delete notes. This application also uses an express backend and saves and retrieves note data from a JSON file. This app is deployed on Heroku. 
 
-**[Video of working application](https://youtu.be/CNgu8uQm5dw)**
+**[Video of working application](https://youtu.be/whfQ-iJw_AY)**
 
 **[Heroku Link for Deployed App](https://idallas-note-taker-app.herokuapp.com/)**
 
