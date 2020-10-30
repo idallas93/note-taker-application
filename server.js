@@ -19,30 +19,29 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.listen(PORT, function() {
     console.log("App listening on PORT " + PORT);
   });
-// routes
-  app.get("/notes", function(req, res) {
-    res.sendFile(path.join(__dirname, "./public/notes.html"));
-  });
-  app.get("*", function(req, res) {
-    res.sendFile(path.join(__dirname, "./public/index.html"));
-  });
-// Returns all notes from notesArray when getNotes() is called in index.js
+// routes for express app
+app.get("/", function (req, res) {
+    res.sendFile(path.join(__dirname, "public/index.html"));
+});
+
+app.get("/notes", function (req, res) {
+    res.sendFile(path.join(__dirname, "public/notes.html"));
+});
+
+// Returns all notes 
 app.get("/api/notes", function (req, res) {
     return res.json(JSON.parse(fs.readFileSync("./db/db.json")));
 });
 
-
-// POSTs
-
 // Route for saving a note to db.json
 app.post("/api/notes", function (req, res) {
-    // req.body is JSON post sent from UI
-    let newNoteRequest = req.body;
-    console.log("New request: ", newNoteRequest);
+    // req.body 
+    let newNote = req.body;
+    console.log("New request: ", newNote);
 
-    notesArray.push(newNoteRequest);
-    // Set id property of newNoteRequest to its index in notesArray
-    newNoteRequest.id = notesArray.indexOf(newNoteRequest);
+    notesArray.push(newNote);
+    // Set id property of newNote
+    newNote.id = notesArray.indexOf(newNote);
 
     fs.writeFileSync("./db/db.json", JSON.stringify(notesArray));
     
@@ -60,9 +59,7 @@ app.post("/api/notes", function (req, res) {
 // DELETEs
 
 app.delete("/api/notes/:id", function (req, res) {
-    // id is index of note in notesArray
     let id = parseInt(req.params.id);
-    // Use id index to remove item from notesArray
     let removeItemArray = notesArray.filter(item => item.id != id);
 
     removeItemArray.forEach(element => element.id = removeItemArray.indexOf(element));
@@ -79,7 +76,7 @@ app.delete("/api/notes/:id", function (req, res) {
 });
 
 
-// Redirect to root if no routes match
+// Redirect to root 
 app.get("*", function (req, res) {
     res.redirect('/');
 });
