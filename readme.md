@@ -8,10 +8,12 @@ This app can be used to write, save, and delete notes. This application also use
 
 **[Heroku Link for Deployed App](https://idallas-note-taker-app.herokuapp.com/)**
 
-
+## Index/ home page
 ![Notetaking App Example1](./example1.png)
+## Note page
 ![Notetaking App Example2](./example2.png)
-![Notetaking App Example3](./example2.png)
+## Note with notes
+![Notetaking App Example3](./example3.png)
 
 ## User Story
 
